@@ -21,7 +21,7 @@ public class Handler {
         }
     }
     public static boolean has(Player player, Item item) {
-        PetsInventory petsInventory = getItem(player);
+        PetsInventory petsInventory = Handler.getItem(player);
         if (petsInventory != null) {
             for (int i = 0; i < petsInventory.getContainerSize(); i++) {
                 ItemStack stack = petsInventory.getItem(i);

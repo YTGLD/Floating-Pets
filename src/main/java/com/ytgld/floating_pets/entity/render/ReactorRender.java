@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.ytgld.floating_pets.HandlerClient;
 import com.ytgld.floating_pets.client.light.LightRenders;
-import com.ytgld.floating_pets.client.warp.FloatingPetsFrameGraph;
 import com.ytgld.floating_pets.entity.Reactor;
 import com.ytgld.floating_pets.entity.state.ReactorRenderState;
 import com.ytgld.floating_pets.items.InitItems;
@@ -63,7 +62,7 @@ public class ReactorRender extends EntityRenderer<Reactor, ReactorRenderState> {
         double y = Mth.lerp(renderState.partialTick, entity.yOld, entity.getY());
         double z = Mth.lerp(renderState.partialTick, entity.zOld, entity.getZ());
         poseStack.pushPose();
-        poseStack.translate(entity.getX()-x, entity.getY()-y,entity.getZ() -z);
+        poseStack.translate(entity.getX()-x, entity.getY()-y + 0.1666,entity.getZ() -z);
         {
             poseStack.pushPose();
             poseStack.rotate(Axis.YN.rotation((Mth.lerp(renderState.partialTick, entity.oldArrowAxis, entity.arrowAxis) / 20)));

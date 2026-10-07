@@ -1,3 +1,18 @@
 {
-  "itemGroup.floating_pets": "漂浮宠物"
+  "itemGroup.floating_pets": "漂浮宠物",
+  "event.floating_pets.equip" :"装备时：",
+
+  "item.floating_pets.agreement": "反应炉协议",
+  "floating_pets.book.agreement.1": "你的第一个小宠物（应该是吧）",
+  "floating_pets.book.agreement.2": "它的名字叫“反应炉”，会漂浮在你的附近\n它可以快速的煅烧附近可以煅烧的物品\n并且产生3倍的经验值奖励！\n\n反应炉协议有两个槽位\n在某些情况下可以获得组件",
+
+
+  "floating_pets.component.factory.name":"反应工厂",
+  "floating_pets.component.factory.tip.1":"提高反应炉的熔炼半径",
+  "floating_pets.component.factory.tip.2":"提高反应炉的熔炼速度",
+  "floating_pets.component.factory.tip.give":"使用反应炉熔炼640个物品后解锁",
+
+
+  "floating_pets.book.tip.1": "召唤你的小跟班！",
+  "floating_pets.book.tip.2": "在收集一些物品后可借助JEI来召唤宠物"
 }

@@ -3,6 +3,10 @@ package com.ytgld.floating_pets.entity;
 import com.ytgld.floating_pets.Handler;
 import com.ytgld.floating_pets.inventory.PetsInventory;
 import com.ytgld.floating_pets.items.InitItems;
+import com.ytgld.floating_pets.items.component.IPetComponent;
+import com.ytgld.floating_pets.items.component.PetComponentBase;
+import com.ytgld.floating_pets.items.component.PetComponents;
+import com.ytgld.floating_pets.items.component.components.Factory;
 import com.ytgld.floating_pets.items.items.Agreement;
 import com.ytgld.floating_pets.other.DataReg;
 import net.minecraft.nbt.CompoundTag;
@@ -29,27 +33,28 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class Reactor extends TamableAnimal {
+public class Reactor extends PetTamableAnimal {
     public Reactor(EntityType<? extends Reactor> type, Level level) {
         super(type, level);
     }
-    private int teleportCooldown;
     public boolean isInReactor =  false;
     public float rotateFloat =  0;
     public float arrowAxis =  0;
     public float oldArrowAxis =  0;
     @Override
     public void tick() {
-        this.setPos(
-                this.getX() + this.getDeltaMovement().x,
-                this.getY() + this.getDeltaMovement().y,
-                this.getZ() + this.getDeltaMovement().z
-        );
-
         super.tick();
+        if (!(getOwner() instanceof Player player)) {
+            return;
+        }
 
-        Vec3 playerPos = this.position();
+        int time = 20;
         int range = 8;
+        if (IPetComponent.isHasComponent(player, PetComponents.factory.get())) {
+            time /= 4;
+            range += 4;
+        }
+        Vec3 playerPos = this.position();
         List<ItemEntity> entities = this.level().getEntitiesOfClass(
                 ItemEntity.class,
                 new AABB(
@@ -70,9 +75,12 @@ public class Reactor extends TamableAnimal {
         oldArrowAxis = arrowAxis;
         arrowAxis += rotateFloat / 10f;
 
+        if (time < 1) {
+            time = 1;
+        }
         for (ItemEntity entity : entities) {
             if (entity.tickCount > 10) {
-                if (entity.tickCount % 5 != 1) {
+                if (entity.tickCount % time != 1) {
                     continue;
                 }
 
@@ -116,34 +124,12 @@ public class Reactor extends TamableAnimal {
                 resultEntity.setDeltaMovement(entity.getDeltaMovement());
                 level.playSound(null, resultEntity.blockPosition(), SoundEvents.LAVA_POP, SoundSource.BLOCKS, 1, 1);
                 level.addFreshEntity(resultEntity);
-                if (stack.isEmpty()) {
 
+                addNumber(InitItems.Agreement_.asItem(),Factory.tag,640,PetComponents.factory.get());
+                if (stack.isEmpty()) {
                     entity.discard();
                 }
             }
-        }
-
-        if (this.teleportCooldown > 0) {
-            --this.teleportCooldown;
-        }
-        if (this.getOwner() instanceof Player owner) {
-            float offset = (float) Math.sin(this.getId());
-            offset = Math.abs(offset);
-            offset += 1;
-            Vec3 currentPos = this.position();
-            float speed = (float) (0.25f * offset - (8 - owner.position().distanceTo(currentPos)) / 10f);
-            if (speed < 0) {
-                speed = 0;
-            }
-            double desiredDistance = 2;
-            Vec3 targetPos = owner.position().add(0, 3, 1);
-
-            Vec3 forward = owner.getLookAngle();
-            Vec3 direction = forward.scale(-1).normalize();
-
-            Vec3 newTargetPos = targetPos.add(direction.scale(desiredDistance));
-
-            this.setDeltaMovement(newTargetPos.subtract(currentPos).normalize().scale(speed));
         }
         dis();
         clear();
@@ -152,7 +138,6 @@ public class Reactor extends TamableAnimal {
     public void move(MoverType type, Vec3 movement) {
     }
     public boolean canLive = true;
-
     private void clear(){
         if (canLive) {
             if (this.getOwner() != null && this.getOwner() instanceof Player player) {
@@ -183,6 +168,8 @@ public class Reactor extends TamableAnimal {
             this.discard();
         }
     }
+
+
 
     public void dis(){
         Vec3 playerPos = this.position();

@@ -6,6 +6,8 @@ import com.ytgld.floating_pets.Handler;
 import com.ytgld.floating_pets.inventory.IPlayer;
 import com.ytgld.floating_pets.inventory.PetsInventory;
 import com.ytgld.floating_pets.items.ItemFloatingPets;
+import com.ytgld.floating_pets.items.component.IPetComponent;
+import com.ytgld.floating_pets.items.component.PetComponentBase;
 import net.minecraft.core.Holder;
 import net.minecraft.world.ItemStackWithSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -24,6 +26,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -56,11 +59,25 @@ public abstract class PlayerMixin implements IPlayer {
                 ItemStack stack = inventory.getItem(i);
                 if (stack.getItem() instanceof ItemFloatingPets itemFloatingPets) {
                     Multimap<Holder<Attribute>, AttributeModifier> doAttribute = itemFloatingPets.doAttribute(stack, player);
+
+                    if (itemFloatingPets instanceof IPetComponent) {
+                        HashSet<PetComponentBase> hashSet =IPetComponent.theComponent(stack);
+                        if (hashSet !=null &&!hashSet.isEmpty()) {
+                            for (PetComponentBase evilGiftBase : hashSet.stream().toList()) {
+                                PetComponentBase.AttHolderModify attHolderModify = evilGiftBase.attHolderModify();
+                                for (Holder<Attribute> attributeHolder : attHolderModify.multimap().keySet()) {
+                                    AttributeModifier modifier = attHolderModify.multimap().get(attributeHolder);
+                                    doAttribute.put(attributeHolder, modifier);
+                                }
+                            }
+                        }
+                    }
                     itemStackMultimapMap$FloatingPets.getOrDefault(stack, HashMultimap.create()).forEach((attributeHolder, attributeModifier)->{
                         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
                         modifiers.put(attributeHolder,attributeModifier);
                         player.getAttributes().removeAttributeModifiers(modifiers);
                     });
+
                     player.getAttributes().addTransientAttributeModifiers(doAttribute);
 
                     itemStackMultimapMap$FloatingPets.put(stack, doAttribute);

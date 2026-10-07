@@ -1,5 +1,6 @@
 package com.ytgld.floating_pets;
 
+import com.ytgld.floating_pets.client.RenderPetComponent;
 import com.ytgld.floating_pets.client.gui_particles.BlackParticlesAdd;
 import com.ytgld.floating_pets.client.warp.FloatingPetsFrameGraph;
 import com.ytgld.floating_pets.entity.Entitys;
@@ -18,6 +19,8 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
+
+import java.util.function.Function;
 
 @Mod(value = FloatingPets.MODID, dist = Dist.CLIENT)
 @EventBusSubscriber(modid = FloatingPets.MODID, value = Dist.CLIENT)
@@ -42,6 +45,10 @@ public class FloatingPetsClient {
         if (Keys.C.consumeClick()) {
             ClientPacketDistributor.sendToServer(new UseSkillHandler.UseSkill());
         }
+    }
+    @SubscribeEvent
+    public static void event(RegisterClientTooltipComponentFactoriesEvent event){
+        event.register(RenderPetComponent.class, Function.identity());
     }
     @SubscribeEvent
     public static void event(RegisterMenuScreensEvent event){

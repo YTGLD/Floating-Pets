@@ -20,6 +20,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec2;
 import org.joml.Matrix3x2fStack;
 import org.jspecify.annotations.NonNull;
@@ -76,11 +77,19 @@ public class FloatingPetsScreen extends Screen {
                 Light.ARGB.color(backAlpha,255,255,255));
         if (lastGuiAdd!=null) {
             int size = 128;
-            graphics.blit(RenderPipelines.GUI_TEXTURED, itemImage(lastGuiAdd.item),
-                    graphics.guiWidth() / 2 - size / 2, graphics.guiHeight() / 2 - size / 2,
-                    0.0F, 0.0F,
-                    size, size, size, size,
-                    Light.ARGB.color(backAlpha / 3, 255, 255, 255));
+            if (lastGuiAdd.image == null) {
+                graphics.blit(RenderPipelines.GUI_TEXTURED, itemImage(lastGuiAdd.item),
+                        graphics.guiWidth() / 2 - size / 2, graphics.guiHeight() / 2 - size / 2,
+                        0.0F, 0.0F,
+                        size, size, size, size,
+                        Light.ARGB.color(backAlpha / 3, 255, 255, 255));
+            }else {
+                graphics.blit(RenderPipelines.GUI_TEXTURED, lastGuiAdd.image,
+                        graphics.guiWidth() / 2 - size / 2, graphics.guiHeight() / 2 - size / 2,
+                        0.0F, 0.0F,
+                        size, size, size, size,
+                        Light.ARGB.color(backAlpha / 3, 255, 255, 255));
+            }
         }
         addText(lastGuiAdd, graphics, xo, yo, mouseX,mouseY);
     }
@@ -181,7 +190,12 @@ public class FloatingPetsScreen extends Screen {
         pose.pushMatrix();
         pose.translate(centerX, centerY);
         pose.translate(-8, -8);
-        graphics.item(stack, 0, 0);
+        if (!stack.isEmpty()) {
+            graphics.item(stack, 0, 0);
+        }else if (ciBookGuiAdd.image != null){
+            graphics.blit(RenderPipelines.GUI_TEXTURED,
+                    ciBookGuiAdd.image,0,0,0,0,16,16,16,16);
+        }
         pose.popMatrix();
 
         if (ciBookGuiAdd.arrowDegree !=null){
@@ -209,6 +223,8 @@ public class FloatingPetsScreen extends Screen {
             return;
         }
 
+        float s = 1.1f;
+
         float textX = windowLeft;
         float textY = windowTop;
 
@@ -223,12 +239,12 @@ public class FloatingPetsScreen extends Screen {
                 ciBookGuiAdd.colorMain,
                 mouseX,
                 mouseY,
-                1.5f
+                s
         );
 
         graphics.pose().popMatrix();
 
-        float currentY = textY + mainLines * mc.font.lineHeight * 1.5f;
+        float currentY = textY + mainLines * mc.font.lineHeight * s;
 
         for (Component text : ciBookGuiAdd.text) {
 
@@ -241,10 +257,10 @@ public class FloatingPetsScreen extends Screen {
                     ciBookGuiAdd.colorText,
                     mouseX,
                     mouseY,
-                    1.5f
+                    s
             );
 
-            currentY += lineCount * mc.font.lineHeight * 1.5f;
+            currentY += lineCount * mc.font.lineHeight * s;
         }
     }
     private int renderColorfulText(
@@ -450,6 +466,7 @@ public class FloatingPetsScreen extends Screen {
 
     public static final class FloatingPetsPage {
         public final Item item;
+        public final Identifier image;
         public final Vec2 vecPos;
         public final Component mainText;
         public final List<Component> text;
@@ -461,7 +478,21 @@ public class FloatingPetsScreen extends Screen {
         public FloatingPetsPage(Item item, Vec2 vecPos, Component mainText,
                                 List<Component> text, int colorMain,
                                 int colorText, ThePage thePage, ArrowDegree arrowDegree) {
+            this.image = null;
             this.item = item;
+            this.vecPos = vecPos;
+            this.mainText = mainText;
+            this.text = text;
+            this.colorMain = colorMain;
+            this.colorText = colorText;
+            this.thePage = thePage;
+            this.arrowDegree = arrowDegree;
+        }
+        public FloatingPetsPage(Identifier identifier, Vec2 vecPos, Component mainText,
+                                List<Component> text, int colorMain,
+                                int colorText, ThePage thePage, ArrowDegree arrowDegree) {
+            this.image = identifier;
+            this.item = ItemStack.EMPTY.getItem();
             this.vecPos = vecPos;
             this.mainText = mainText;
             this.text = text;
@@ -480,7 +511,7 @@ public class FloatingPetsScreen extends Screen {
         }
     }
     public enum ThePage {
-        BASE(Identifier.fromNamespaceAndPath(FloatingPets.MODID, "textures/gui/book/black_all.png"));
+        BASE(Identifier.fromNamespaceAndPath(FloatingPets.MODID, "textures/gui/book/back.png"));
         public final Identifier identifier;
 
         ThePage(Identifier identifier) {
