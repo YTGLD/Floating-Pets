@@ -6,6 +6,7 @@ import com.ytgld.floating_pets.FloatingPets;
 import com.ytgld.floating_pets.client.Light;
 import com.ytgld.floating_pets.client.RenderPetComponent;
 import com.ytgld.floating_pets.items.component.IPetComponent;
+import com.ytgld.floating_pets.other.Keys;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
@@ -47,6 +48,10 @@ public class ItemFloatingPets extends Item implements IPetComponent {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay,
                                 Consumer<Component> tooltipComponents, TooltipFlag flag) {
+        if (canUse()) {
+            tooltipComponents.accept(Component.translatable("event.floating_pets.open", Keys.R.getKey().getDisplayName()).withStyle(ChatFormatting.GOLD));
+            tooltipComponents.accept(Component.translatable("event.floating_pets.use_skill",Keys.C.getKey().getDisplayName()).withStyle(ChatFormatting.GOLD));
+        }
         text(stack, tooltipComponents, flag);
     }
 
@@ -59,6 +64,9 @@ public class ItemFloatingPets extends Item implements IPetComponent {
         return Identifier.fromNamespaceAndPath(FloatingPets.MODID,this.getDescriptionId());
     }
 
+    public boolean canUse(){
+        return true;
+    }
     @Override
     public int maxComponentNumber(ItemStack stack) {
         return 0;

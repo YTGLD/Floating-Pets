@@ -2,47 +2,35 @@ package com.ytgld.floating_pets.items.items;
 
 import com.ytgld.floating_pets.Handler;
 import com.ytgld.floating_pets.entity.Entitys;
-import com.ytgld.floating_pets.entity.Reactor;
+import com.ytgld.floating_pets.entity.ChaosCube;
+import com.ytgld.floating_pets.entity.ChaosCube;
 import com.ytgld.floating_pets.inventory.PetsInventory;
 import com.ytgld.floating_pets.items.InitItems;
 import com.ytgld.floating_pets.items.ItemFloatingPets;
-import com.ytgld.floating_pets.items.component.IPetComponent;
-import com.ytgld.floating_pets.items.component.PetComponents;
 import com.ytgld.floating_pets.other.DataReg;
-import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-import java.util.HashSet;
-import java.util.function.Consumer;
-
-public class Agreement extends ItemFloatingPets {
-    public Agreement(Item.Properties properties) {
+public class YellowCube extends ItemFloatingPets {
+    public YellowCube(Properties properties) {
         super(properties);
     }
-    public static final String chestHasReactor= "Agreement";
-
     public static void event(PlayerEvent.PlayerRespawnEvent event){
         Player player = event.getEntity();
         if (!Handler.has(player, InitItems.Agreement_.asItem())) {
             return;
         }
-        Reactor reactor = new Reactor(Entitys.Reactor_.get(), player.level());
-        reactor.setPos(player.position());
-        reactor.setOwner(player);
-        reactor.tame(player);
-        player.level().addFreshEntity(reactor);
+        ChaosCube chaosCube = new ChaosCube(Entitys.ChaosCube_.get(), player.level());
+        chaosCube.setPos(player.position());
+        chaosCube.setOwner(player);
+        chaosCube.tame(player);
+        player.level().addFreshEntity(chaosCube);
     }
+    public static final String YELLOW_CUBE = "YellowCube";
     public static void onKeyIsDown(Player player) {
-        if (!Handler.has(player, InitItems.Agreement_.asItem())) {
+        if (!Handler.has(player, InitItems.YellowCube_.asItem())) {
             return;
         }
         PetsInventory chestInventory = Handler.getItem(player);
@@ -50,19 +38,19 @@ public class Agreement extends ItemFloatingPets {
             if (!player.level().isClientSide()) {
                 for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                     ItemStack stack = chestInventory.getItem(i);
-                    if (stack.is(InitItems.Agreement_)) {
+                    if (stack.is(InitItems.YellowCube_)) {
                         CompoundTag compoundTag = stack.get(DataReg.tag);
                         if (compoundTag != null) {
-                            if (!compoundTag.getBooleanOr(chestHasReactor, false)) {
-                                Reactor reactor = new Reactor(Entitys.Reactor_.get(), player.level());
-                                reactor.setPos(player.position());
-                                reactor.setOwner(player);
-                                reactor.tame(player);
-                                player.level().addFreshEntity(reactor);
-                                compoundTag.putBoolean(chestHasReactor, true);
+                            if (!compoundTag.getBooleanOr(YELLOW_CUBE, false)) {
+                                ChaosCube chaosCube = new ChaosCube(Entitys.ChaosCube_.get(), player.level());
+                                chaosCube.setPos(player.position());
+                                chaosCube.setOwner(player);
+                                chaosCube.tame(player);
+                                player.level().addFreshEntity(chaosCube);
+                                compoundTag.putBoolean(YELLOW_CUBE, true);
                                 break;
                             } else {
-                                compoundTag.putBoolean(chestHasReactor, false);
+                                compoundTag.putBoolean(YELLOW_CUBE, false);
                             }
                         } else {
                             stack.set(DataReg.tag, new CompoundTag());
@@ -72,9 +60,9 @@ public class Agreement extends ItemFloatingPets {
             }
         }
     }
+
     @Override
     public int maxComponentNumber(ItemStack stack) {
         return 2;
     }
 }
-

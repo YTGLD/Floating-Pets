@@ -2,6 +2,8 @@ package com.ytgld.floating_pets.items.component;
 
 import com.ytgld.floating_pets.FloatingPets;
 import com.ytgld.floating_pets.items.component.components.Factory;
+import com.ytgld.floating_pets.items.component.components.Support;
+import com.ytgld.floating_pets.items.component.components.SymbioticMeatballs;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -16,6 +18,8 @@ public final class PetComponents {
     public static final DeferredRegister<PetComponentBase> REGISTER = DeferredRegister.create(GiftRegister, FloatingPets.MODID);
 
     public static DeferredHolder<PetComponentBase, ?> factory = REGISTER.register("factory", Factory::new);
+    public static DeferredHolder<PetComponentBase, ?> support = REGISTER.register("support", Support::new);
+    public static DeferredHolder<PetComponentBase, ?> symbiotic_meatballs = REGISTER.register("symbiotic_meatballs", SymbioticMeatballs::new);
 
 
     public static void event(NewRegistryEvent event){

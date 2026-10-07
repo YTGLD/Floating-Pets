@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+     "minecraft:furnace",
+     "minecraft:diamond",
+     "minecraft:book"
+  ],
+  "result": {
+    "count": 1,
+    "id": "floating_pets:book"
+  }
+}

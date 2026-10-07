@@ -1,6 +1,15 @@
 {
   "itemGroup.floating_pets": "漂浮宠物",
   "event.floating_pets.equip" :"装备时：",
+  "item.floating_pets.book": "书",
+  "event.floating_pets.use_skill" :"按下'%d'键召唤或者收回",
+  "event.floating_pets.open" :"按下'%d'打开装备界面",
+
+
+  "floating_pets.book.clones": "\n右键关闭",
+  "floating_pets.book.tip.2": "在收集一些物品后可借助JEI来召唤宠物",
+  "floating_pets.book.tip.1": "召唤你的小跟班！",
+
 
   "item.floating_pets.agreement": "反应炉协议",
   "floating_pets.book.agreement.1": "你的第一个小宠物（应该是吧）",
@@ -12,7 +21,22 @@
   "floating_pets.component.factory.tip.2":"提高反应炉的熔炼速度",
   "floating_pets.component.factory.tip.give":"使用反应炉熔炼640个物品后解锁",
 
+  "item.floating_pets.yellow_cube": "黄色玻璃块",
+  "floating_pets.book.yellow_cube.1": "继“反应炉”后的第二个宠物",
+  "floating_pets.book.yellow_cube.2": "它的名字叫“混沌立方”，会漂浮在你的附近\n它可以每隔一段时间治疗一次玩家！\n\n黄色玻璃块有两个槽位\n在某些情况下可以获得组件",
 
-  "floating_pets.book.tip.1": "召唤你的小跟班！",
-  "floating_pets.book.tip.2": "在收集一些物品后可借助JEI来召唤宠物"
+  "floating_pets.component.support.name": "救援医药箱",
+  "floating_pets.component.support.tip.1":"提高混沌立方的治疗速度",
+  "floating_pets.component.support.tip.2":"在混沌立方附近会获得抗性提升效果",
+  "floating_pets.component.support.tip.give":"累计治疗自身600点生命值后解锁",
+
+  "floating_pets.component.symbiotic_meatballs.name": "共生肉团",
+  "floating_pets.component.symbiotic_meatballs.tip.1":"混沌立方可以治疗你的其他宠物",
+  "floating_pets.component.symbiotic_meatballs.tip.2":"混沌立方的治疗半径得到扩大",
+  "floating_pets.component.symbiotic_meatballs.tip.give":"吃下2个附魔金苹果解锁",
+
+
+  "item.floating_pets.blood_meat": "血肉",
+  "floating_pets.book.blood_meat.1": "血肉增生的砖头（第三个宠物）",
+  "floating_pets.book.blood_meat.2": "它的名字叫“血浆球”，会漂浮在你的附近\n它可以每隔一段时间攻击附近的敌对生物\n\n血肉有两个槽位\n在某些情况下可以获得组件"
 }

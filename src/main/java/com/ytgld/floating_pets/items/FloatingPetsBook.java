@@ -18,7 +18,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
-public class FloatingPetsBook extends Item {
+public class FloatingPetsBook extends ItemFloatingPets {
     public FloatingPetsBook(Properties properties) {
         super(properties);
     }
@@ -28,6 +28,11 @@ public class FloatingPetsBook extends Item {
             PacketDistributor.sendToPlayer(serverPlayer, new OpenBookPayload());
         }
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public boolean canUse() {
+        return false;
     }
 
     public record OpenBookPayload() implements CustomPacketPayload {

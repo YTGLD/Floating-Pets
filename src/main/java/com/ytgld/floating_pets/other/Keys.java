@@ -1,4 +1,4 @@
-package com.ytgld.floating_pets.event;
+package com.ytgld.floating_pets.other;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.ytgld.floating_pets.FloatingPets;

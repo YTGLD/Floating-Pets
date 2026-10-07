@@ -2,6 +2,8 @@ package com.ytgld.floating_pets.event;
 
 import com.ytgld.floating_pets.FloatingPets;
 import com.ytgld.floating_pets.items.items.Agreement;
+import com.ytgld.floating_pets.items.items.BloodMeat;
+import com.ytgld.floating_pets.items.items.YellowCube;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -42,6 +44,8 @@ public class UseSkillHandler {
     public static class ClientOnly {
         public static void use(Player player) {
             Agreement.onKeyIsDown(player);
+            YellowCube.onKeyIsDown(player);
+            BloodMeat.onKeyIsDown(player);
         }
     }
 }

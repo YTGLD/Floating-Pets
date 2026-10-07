@@ -125,7 +125,7 @@ public class Reactor extends PetTamableAnimal {
                 level.playSound(null, resultEntity.blockPosition(), SoundEvents.LAVA_POP, SoundSource.BLOCKS, 1, 1);
                 level.addFreshEntity(resultEntity);
 
-                addNumber(InitItems.Agreement_.asItem(),Factory.tag,640,PetComponents.factory.get());
+                IPetComponent.addNumber(player,InitItems.Agreement_.asItem(),Factory.tag,640,PetComponents.factory.get());
                 if (stack.isEmpty()) {
                     entity.discard();
                 }
@@ -193,13 +193,7 @@ public class Reactor extends PetTamableAnimal {
         return false;
     }
 
-    @Override
-    public boolean isInvulnerableTo(ServerLevel level, DamageSource source) {
-        if (source.is(DamageTypes.IN_WALL)) {
-            return true;
-        }
-        return super.isInvulnerableTo(level, source);
-    }
+
 
     @Override
     public boolean onGround() {

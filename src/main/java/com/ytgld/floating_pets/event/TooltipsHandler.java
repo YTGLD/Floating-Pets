@@ -40,33 +40,31 @@ public class TooltipsHandler {
         if (player!=null) {
             if (stack.getItem() instanceof ItemFloatingPets itemFloatingPets) {
                 Multimap<Holder<Attribute>, AttributeModifier> attributes = itemFloatingPets.doAttribute(stack, player);
-                if (attributes != null) {
-                    HashSet<PetComponentBase> hashSet =IPetComponent.theComponent(stack);
-                    if (!hashSet.isEmpty()) {
-                        for (PetComponentBase petComponentBase : hashSet.stream().toList()) {
-                            PetComponentBase.AttHolderModify attHolderModify = petComponentBase.attHolderModify();
-                            for (Holder<Attribute> attributeHolder : attHolderModify.multimap().keySet()) {
-                                AttributeModifier modifier = attHolderModify.multimap().get(attributeHolder);
-                                attributes.put(attributeHolder, modifier);
-                                petComponentBase.text(stack,attributesTooltip,evt.getContext().flag());
-                            }
+                HashSet<PetComponentBase> hashSet =IPetComponent.theComponent(stack);
+                if (!hashSet.isEmpty()) {
+                    for (PetComponentBase petComponentBase : hashSet.stream().toList()) {
+                        PetComponentBase.AttHolderModify attHolderModify = petComponentBase.attHolderModify();
+                        petComponentBase.text(stack,attributesTooltip,evt.getContext().flag());
+                        for (Holder<Attribute> attributeHolder : attHolderModify.multimap().keySet()) {
+                            AttributeModifier modifier = attHolderModify.multimap().get(attributeHolder);
+                            attributes.put(attributeHolder, modifier);
                         }
                     }
+                }
 
-                    if (!attributes.isEmpty()) {
-                        attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
-                        evt.addTooltipLines(Component.empty());
-                        attributesTooltip.add(Component.translatable("event.floating_pets.equip").withStyle(ChatFormatting.GOLD));
-                        AttributeUtil.applyTextFor(
-                                stack,
-                                attributesTooltip::add,
-                                attributes,
-                                AttributeTooltipContext.of(player, context, context.tooltipDisplay(), context.flag()));
-                        for (Component component : attributesTooltip) {
-                            MutableComponent co = component.copy();
-                            co.withStyle(ChatFormatting.GOLD);
-                            evt.addTooltipLines(co);
-                        }
+                if (!attributes.isEmpty()) {
+                    attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
+                    evt.addTooltipLines(Component.empty());
+                    attributesTooltip.add(Component.translatable("event.floating_pets.equip").withStyle(ChatFormatting.GOLD));
+                    AttributeUtil.applyTextFor(
+                            stack,
+                            attributesTooltip::add,
+                            attributes,
+                            AttributeTooltipContext.of(player, context, context.tooltipDisplay(), context.flag()));
+                    for (Component component : attributesTooltip) {
+                        MutableComponent co = component.copy();
+                        co.withStyle(ChatFormatting.GOLD);
+                        evt.addTooltipLines(co);
                     }
                 }
             }

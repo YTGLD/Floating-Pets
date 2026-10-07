@@ -24,14 +24,15 @@ public class FloatingPets {
 
     public FloatingPets(IEventBus modEventBus, ModContainer modContainer) {
         InitItems.ITEMS.register(modEventBus);
+        InitItems.CREATIVE_MODE_TABS.register(modEventBus);
 
-        NeoForge.EVENT_BUS.register(new MainEvent());
 
         Entitys.REGISTRY.register(modEventBus);
         PetsMenuTypes.register.register(modEventBus);
         DataReg.REGISTRY.register(modEventBus);
         PetComponents.REGISTER.register(modEventBus);
 
+        NeoForge.EVENT_BUS.register(new MainEvent());
         modEventBus.addListener(PetComponents::event);
         modEventBus.addListener(this::registerPayloadHandler);
     }

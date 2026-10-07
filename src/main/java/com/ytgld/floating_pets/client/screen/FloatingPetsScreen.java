@@ -20,7 +20,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec2;
 import org.joml.Matrix3x2fStack;
 import org.jspecify.annotations.NonNull;
@@ -501,14 +500,20 @@ public class FloatingPetsScreen extends Screen {
             this.thePage = thePage;
             this.arrowDegree = arrowDegree;
         }
+        public FloatingPetsPage(Identifier identifier, Vec2 vecPos, Component mainText,
+                                List<Component> text, int colorMain,
+                                int colorText, ThePage thePage) {
+            this(identifier, vecPos, mainText, text, colorMain, colorText, thePage, null);
+        }
+
+        public FloatingPetsPage(Item item, Vec2 vecPos, Component mainText,
+                                List<Component> text, int colorMain,
+                                int colorText, ThePage thePage) {
+            this(item, vecPos, mainText, text, colorMain, colorText, thePage, null);
+        }
     }
 
-    public static class ArrowDegree{
-        public final float d;
-        public ArrowDegree( float d){
-            this.d = d;
-
-        }
+    public record ArrowDegree(float d) {
     }
     public enum ThePage {
         BASE(Identifier.fromNamespaceAndPath(FloatingPets.MODID, "textures/gui/book/back.png"));

@@ -1,5 +1,7 @@
 package com.ytgld.floating_pets.inventory;
 
+import com.ytgld.floating_pets.FloatingPets;
+import com.ytgld.floating_pets.items.InitItems;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.ItemStackWithSlot;
@@ -19,21 +21,12 @@ public class PetsInventory extends SimpleContainer {
         for(int i = 0; i < this.getContainerSize(); ++i) {
             this.setItem(i, ItemStack.EMPTY);
         }
-
         for (ItemStackWithSlot itemstackwithslot : input) {
             if (itemstackwithslot.isValidInContainer(this.getContainerSize())) {
                 this.setItem(itemstackwithslot.slot(), itemstackwithslot.stack());
             }
         }
     }
-    @Override
-    public void stopOpen(ContainerUser containerUser) {
-        LivingEntity living = containerUser.getLivingEntity();
-        if (living instanceof Player player) {
-            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.CHEST_CLOSE, SoundSource.AMBIENT, 1, 1);
-        }
-    }
-
     public void storeAsSlots(ValueOutput.TypedOutputList<ItemStackWithSlot> output) {
         for(int i = 0; i < this.getContainerSize(); ++i) {
             ItemStack itemstack = this.getItem(i);
