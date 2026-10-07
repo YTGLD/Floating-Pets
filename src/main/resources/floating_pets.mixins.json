@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "com.ytgld.floating_pets.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "PlayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  },
+  "client": [
+    "guiparticles.ScreenMixin",
+    "update.LevelRendererMixin"
+  ]
+}
