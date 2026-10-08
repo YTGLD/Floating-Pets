@@ -13,6 +13,9 @@ public class Keys {
             (new KeyMapping("key.floating_pets.r", InputConstants.KEY_R, key));
     public static final KeyMapping C =
             (new KeyMapping("key.floating_pets.c", InputConstants.KEY_C, key));
+    public static final KeyMapping V =
+            (new KeyMapping("key.floating_pets.v", InputConstants.KEY_V, key));
+
 
 
 

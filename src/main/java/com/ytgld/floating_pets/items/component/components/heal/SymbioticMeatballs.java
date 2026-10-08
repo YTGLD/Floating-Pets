@@ -1,4 +1,4 @@
-package com.ytgld.floating_pets.items.component.components;
+package com.ytgld.floating_pets.items.component.components.heal;
 
 import com.ytgld.floating_pets.FloatingPets;
 import com.ytgld.floating_pets.items.InitItems;
@@ -13,7 +13,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
-import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
 
 import java.util.List;
 

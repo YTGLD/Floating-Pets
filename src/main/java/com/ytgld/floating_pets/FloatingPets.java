@@ -3,6 +3,7 @@ package com.ytgld.floating_pets;
 import com.mojang.logging.LogUtils;
 import com.ytgld.floating_pets.entity.Entitys;
 import com.ytgld.floating_pets.event.OpenHandler;
+import com.ytgld.floating_pets.event.UsePetsHandler;
 import com.ytgld.floating_pets.event.UseSkillHandler;
 import com.ytgld.floating_pets.event.use.MainEvent;
 import com.ytgld.floating_pets.inventory.PetsMenuTypes;
@@ -40,5 +41,6 @@ public class FloatingPets {
         FloatingPetsBook.register(evt);
         OpenHandler.register(evt);
         UseSkillHandler.register(evt);
+        UsePetsHandler.register(evt);
     }
 }

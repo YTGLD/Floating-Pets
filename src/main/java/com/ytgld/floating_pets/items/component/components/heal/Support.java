@@ -1,7 +1,6 @@
-package com.ytgld.floating_pets.items.component.components;
+package com.ytgld.floating_pets.items.component.components.heal;
 
 import com.ytgld.floating_pets.FloatingPets;
-import com.ytgld.floating_pets.Handler;
 import com.ytgld.floating_pets.items.InitItems;
 import com.ytgld.floating_pets.items.component.IPetComponent;
 import com.ytgld.floating_pets.items.component.PetComponentBase;

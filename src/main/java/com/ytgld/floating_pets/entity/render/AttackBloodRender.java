@@ -45,10 +45,6 @@ public class AttackBloodRender extends EntityRenderer<AttackBlood, AttackBloodRe
         AttackBlood entity = renderState.entity;
 
         HandlerClient.setShowRenderLight(true);
-        LightRenders.addLight( entity.getX(),entity.getY(),entity.getZ(),
-                8,
-                1 ,0, 0
-                ,1);
 
         double x = Mth.lerp(renderState.partialTick, entity.xOld, entity.getX());
         double y = Mth.lerp(renderState.partialTick, entity.yOld, entity.getY());
@@ -62,6 +58,11 @@ public class AttackBloodRender extends EntityRenderer<AttackBlood, AttackBloodRe
         });
 
         if (entity.canSee) {
+            LightRenders.addLight( entity.getX(),entity.getY(),entity.getZ(),
+                    12,
+                    1 ,0, 0
+                    ,1);
+
             collector.submitCustomGeometry(poseStack, MRender.endBlack, (pose, bufferSource) -> {
                 renderSphere1(pose, bufferSource, 0, 0.15f);
             });

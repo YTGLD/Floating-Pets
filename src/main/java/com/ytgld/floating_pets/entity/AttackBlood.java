@@ -1,7 +1,6 @@
 package com.ytgld.floating_pets.entity;
 
 import com.ytgld.floating_pets.FloatingPets;
-import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -205,27 +204,5 @@ public class AttackBlood extends ThrowableItemProjectile {
 
 
         attack();
-    }
-    private void findNewTarget() {
-
-        AABB searchBox = this.getBoundingBox().inflate(16);
-        List<LivingEntity> entities = this.level().getEntitiesOfClass(LivingEntity.class, searchBox);
-        double closestDistance = Double.MAX_VALUE;
-        LivingEntity closestEntity = null;
-
-
-        for (LivingEntity entity : entities) {
-            Identifier name = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
-            if (this.getOwner() != null) {
-                if (!name.getNamespace().equals(FloatingPets.MODID) && !(entity.is(this.getOwner()))) {
-                    double distance = this.distanceToSqr(entity);
-                    if (distance < closestDistance) {
-                        closestDistance = distance;
-                        closestEntity = entity;
-                    }
-                }
-            }
-        }
-        this.target = closestEntity;
     }
 }

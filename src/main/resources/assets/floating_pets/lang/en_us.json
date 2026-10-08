@@ -1,15 +1,19 @@
 {
+  "key.category.floating_pets.key": "漂浮宠物",
   "itemGroup.floating_pets": "漂浮宠物",
   "event.floating_pets.equip" :"装备时：",
   "item.floating_pets.book": "书",
   "event.floating_pets.use_skill" :"按下'%d'键召唤或者收回",
+  "event.floating_pets.use_pets" :"按下'%d'键使用宠物技能",
   "event.floating_pets.open" :"按下'%d'打开装备界面",
   "floating_pets.book.clones": "\n右键关闭",
   "floating_pets.book.tip.2": "在收集一些物品后可借助JEI来召唤宠物",
   "floating_pets.book.tip.1": "召唤你的小跟班！",
   "floating_pets.agreement": "煅烧物品数：%d",
   "floating_pets.heal": "受到治疗：%d",
-
+  "key.floating_pets.c": "召唤宠物",
+  "key.floating_pets.r": "打开界面",
+  "key.floating_pets.v": "使用宠物技能",
 
 
   "entity.floating_pets.reactor": "反应炉",
@@ -53,6 +57,11 @@
   "floating_pets.component.symbiotic_meatballs.tip.2":"混沌立方的治疗半径得到扩大",
   "floating_pets.component.symbiotic_meatballs.tip.give":"吃下2个附魔金苹果解锁",
 
+  "floating_pets.component.detonator.name": "雷管",
+  "floating_pets.component.detonator.tip.1":"按下快捷键引爆反应炉",
+  "floating_pets.component.detonator.tip.2":"爆炸不会伤害到玩家",
+  "floating_pets.component.detonator.tip.3":"但是爆炸后短时间无法再次召唤反应炉",
+  "floating_pets.component.detonator.tip.give":"累计放入16块TNT在反应炉协议中来解锁\n（拖动TNT在背包界面右键反应炉协议）",
 
   "floating_pets.component.pill.name": "急救药丸",
   "floating_pets.component.pill.tip.1":"在主人受到8点以上的伤害时给予BUFF",

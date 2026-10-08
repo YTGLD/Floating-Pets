@@ -3,18 +3,15 @@ package com.ytgld.floating_pets.items;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.floating_pets.FloatingPets;
-import com.ytgld.floating_pets.client.Light;
 import com.ytgld.floating_pets.client.RenderPetComponent;
 import com.ytgld.floating_pets.items.component.IPetComponent;
-import com.ytgld.floating_pets.items.component.components.Pill;
+import com.ytgld.floating_pets.items.component.components.heal.Pill;
+import com.ytgld.floating_pets.items.component.components.ironn.Detonator;
 import com.ytgld.floating_pets.other.Keys;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -50,6 +47,9 @@ public class ItemFloatingPets extends Item implements IPetComponent {
         if (Pill.give(self, other)) {
             return true;
         }
+        if (Detonator.give(self, other,player)) {
+            return true;
+        }
         return super.overrideOtherStackedOnMe(self, other, slot, clickAction, player, carriedItem);
     }
 
@@ -64,6 +64,10 @@ public class ItemFloatingPets extends Item implements IPetComponent {
             tooltipComponents.accept(Component.translatable("event.floating_pets.open", Keys.R.getKey().getDisplayName()).withStyle(ChatFormatting.GOLD));
             tooltipComponents.accept(Component.translatable("event.floating_pets.use_skill",Keys.C.getKey().getDisplayName()).withStyle(ChatFormatting.GOLD));
         }
+        if (canUse()) {
+            tooltipComponents.accept(Component.translatable("event.floating_pets.use_pets",Keys.V.getKey().getDisplayName()).withStyle(ChatFormatting.GOLD));
+        }
+        tooltipComponents.accept(Component.literal(""));
         text(stack, tooltipComponents, flag);
     }
 
@@ -78,6 +82,10 @@ public class ItemFloatingPets extends Item implements IPetComponent {
 
     public boolean canUse(){
         return true;
+    }
+
+    public boolean canUsePetSkill(){
+        return false;
     }
     @Override
     public int maxComponentNumber(ItemStack stack) {

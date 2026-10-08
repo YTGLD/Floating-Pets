@@ -78,7 +78,7 @@ public interface IPetComponent {
                 if (stack.getItem() instanceof IPetComponent) {
                     PetComponentData petComponentData = petsData(stack);
                     if (petComponentData == null) {
-                        return false;
+                        continue;
                     }
                     return petComponentData.hashSet().contains(giftBase.id().toString());
                 }
@@ -102,6 +102,7 @@ public interface IPetComponent {
                     if (compoundTag != null) {
                         if (compoundTag.getIntOr(string, 0) > max) {
                             IPetComponent.addComponent(stack,componentBase);
+
                             break;
                         }
                     }

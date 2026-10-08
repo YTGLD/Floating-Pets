@@ -6,24 +6,17 @@ import com.ytgld.floating_pets.entity.Reactor;
 import com.ytgld.floating_pets.inventory.PetsInventory;
 import com.ytgld.floating_pets.items.InitItems;
 import com.ytgld.floating_pets.items.ItemFloatingPets;
-import com.ytgld.floating_pets.items.component.IPetComponent;
-import com.ytgld.floating_pets.items.component.PetComponents;
-import com.ytgld.floating_pets.items.component.components.Factory;
-import com.ytgld.floating_pets.items.component.components.Support;
+import com.ytgld.floating_pets.items.component.components.ironn.Factory;
 import com.ytgld.floating_pets.other.DataReg;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-import java.util.HashSet;
 import java.util.function.Consumer;
 
 public class Agreement extends ItemFloatingPets {
@@ -45,6 +38,9 @@ public class Agreement extends ItemFloatingPets {
     }
     public static void onKeyIsDown(Player player) {
         if (!Handler.has(player, InitItems.Agreement_.asItem())) {
+            return;
+        }
+        if (player.getCooldowns().isOnCooldown(InitItems.Agreement_.asItem().getDefaultInstance())) {
             return;
         }
         PetsInventory chestInventory = Handler.getItem(player);

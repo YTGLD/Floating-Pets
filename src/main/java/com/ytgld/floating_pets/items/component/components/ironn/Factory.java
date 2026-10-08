@@ -1,16 +1,13 @@
-package com.ytgld.floating_pets.items.component.components;
+package com.ytgld.floating_pets.items.component.components.ironn;
 
 import com.ytgld.floating_pets.FloatingPets;
 import com.ytgld.floating_pets.items.component.PetComponentBase;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class Factory extends PetComponentBase {

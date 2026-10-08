@@ -1,10 +1,11 @@
 package com.ytgld.floating_pets.items.component;
 
 import com.ytgld.floating_pets.FloatingPets;
-import com.ytgld.floating_pets.items.component.components.Factory;
-import com.ytgld.floating_pets.items.component.components.Pill;
-import com.ytgld.floating_pets.items.component.components.Support;
-import com.ytgld.floating_pets.items.component.components.SymbioticMeatballs;
+import com.ytgld.floating_pets.items.component.components.ironn.Detonator;
+import com.ytgld.floating_pets.items.component.components.ironn.Factory;
+import com.ytgld.floating_pets.items.component.components.heal.Pill;
+import com.ytgld.floating_pets.items.component.components.heal.Support;
+import com.ytgld.floating_pets.items.component.components.heal.SymbioticMeatballs;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -22,6 +23,7 @@ public final class PetComponents {
     public static DeferredHolder<PetComponentBase, ?> support = REGISTER.register("support", Support::new);
     public static DeferredHolder<PetComponentBase, ?> symbiotic_meatballs = REGISTER.register("symbiotic_meatballs", SymbioticMeatballs::new);
     public static DeferredHolder<PetComponentBase, ?> pill = REGISTER.register("pill", Pill::new);
+    public static DeferredHolder<PetComponentBase, ?> detonator = REGISTER.register("detonator", Detonator::new);
 
 
     public static void event(NewRegistryEvent event){

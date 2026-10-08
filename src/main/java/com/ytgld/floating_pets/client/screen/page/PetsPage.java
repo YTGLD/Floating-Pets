@@ -39,29 +39,23 @@ public class PetsPage implements RegisterBookPage {
                 color,color,
                 FloatingPetsScreen.ThePage.BASE,
                 new FloatingPetsScreen.ArrowDegree(d90)));
+        addIron(list);
+        addChaosCube(list);
+        addMeat(list);
 
-        list.add(new FloatingPetsScreen.FloatingPetsPage(InitItems.Agreement_.asItem(),
-                new Vec2(posOffset,0),Component.translatable("floating_pets.book.agreement.1"),
+    }
+    private void addMeat(List<FloatingPetsScreen.FloatingPetsPage> list) {
+        list.add(new FloatingPetsScreen.FloatingPetsPage(InitItems.BloodMeat_.asItem(),
+                new Vec2(posOffset * 3,posOffset * 3),Component.translatable("floating_pets.book.blood_meat.1"),
                 List.of(
-                        Component.translatable("floating_pets.book.agreement.2"),
+                        Component.translatable("floating_pets.book.blood_meat.2"),
                         clones()
                 ),
                 color,color,
                 FloatingPetsScreen.ThePage.BASE,
-                new FloatingPetsScreen.ArrowDegree(d180)));
-
-        list.add(new FloatingPetsScreen.FloatingPetsPage(Identifier.fromNamespaceAndPath(FloatingPets.MODID,
-                "textures/components/factory.png"),
-                new Vec2(posOffset,posOffset),Component.translatable("floating_pets.component.factory.name"),
-                List.of(
-                        Component.translatable("floating_pets.component.factory.tip.1"),
-                        Component.translatable("floating_pets.component.factory.tip.2"),
-                        Component.translatable("floating_pets.component.factory.tip.give"),
-                        clones()
-                ),
-                color,color,
-                FloatingPetsScreen.ThePage.BASE,
-                null));
+                new FloatingPetsScreen.ArrowDegree(d270)));
+    }
+    private void addChaosCube(List<FloatingPetsScreen.FloatingPetsPage> list) {
 
         list.add(new FloatingPetsScreen.FloatingPetsPage(InitItems.YellowCube_.asItem(),
                 new Vec2(posOffset * 2,posOffset),Component.translatable("floating_pets.book.yellow_cube.1"),
@@ -113,18 +107,44 @@ public class PetsPage implements RegisterBookPage {
                 color,color,
                 FloatingPetsScreen.ThePage.BASE,
                 null));
+    }
+    private void addIron(List<FloatingPetsScreen.FloatingPetsPage> list){
 
-        list.add(new FloatingPetsScreen.FloatingPetsPage(InitItems.BloodMeat_.asItem(),
-                new Vec2(posOffset * 3,posOffset * 3),Component.translatable("floating_pets.book.blood_meat.1"),
+        list.add(new FloatingPetsScreen.FloatingPetsPage(InitItems.Agreement_.asItem(),
+                new Vec2(posOffset,0),Component.translatable("floating_pets.book.agreement.1"),
                 List.of(
-                        Component.translatable("floating_pets.book.blood_meat.2"),
+                        Component.translatable("floating_pets.book.agreement.2"),
+                        clones()
+                ),
+                color,color,
+                FloatingPetsScreen.ThePage.BASE,
+                new FloatingPetsScreen.ArrowDegree(d180)));
+
+        list.add(new FloatingPetsScreen.FloatingPetsPage(Identifier.fromNamespaceAndPath(FloatingPets.MODID,
+                "textures/components/factory.png"),
+                new Vec2(posOffset,posOffset),Component.translatable("floating_pets.component.factory.name"),
+                List.of(
+                        Component.translatable("floating_pets.component.factory.tip.1"),
+                        Component.translatable("floating_pets.component.factory.tip.2"),
+                        Component.translatable("floating_pets.component.factory.tip.give"),
                         clones()
                 ),
                 color,color,
                 FloatingPetsScreen.ThePage.BASE,
                 new FloatingPetsScreen.ArrowDegree(d270)));
 
-
-
+        list.add(new FloatingPetsScreen.FloatingPetsPage(Identifier.fromNamespaceAndPath(FloatingPets.MODID,
+                "textures/components/detonator.png"),
+                new Vec2(0,posOffset),Component.translatable("floating_pets.component.detonator.name"),
+                List.of(
+                        Component.translatable("floating_pets.component.detonator.tip.1"),
+                        Component.translatable("floating_pets.component.detonator.tip.2"),
+                        Component.translatable("floating_pets.component.detonator.tip.3"),
+                        Component.translatable("floating_pets.component.detonator.tip.give"),
+                        clones()
+                ),
+                color,color,
+                FloatingPetsScreen.ThePage.BASE,
+                null));
     }
 }

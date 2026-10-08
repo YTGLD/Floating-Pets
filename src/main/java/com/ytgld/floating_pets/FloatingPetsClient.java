@@ -5,6 +5,7 @@ import com.ytgld.floating_pets.client.gui_particles.BlackParticlesAdd;
 import com.ytgld.floating_pets.client.warp.FloatingPetsFrameGraph;
 import com.ytgld.floating_pets.entity.Entitys;
 import com.ytgld.floating_pets.entity.render.*;
+import com.ytgld.floating_pets.event.UsePetsHandler;
 import com.ytgld.floating_pets.other.Keys;
 import com.ytgld.floating_pets.event.OpenHandler;
 import com.ytgld.floating_pets.event.UseSkillHandler;
@@ -45,6 +46,10 @@ public class FloatingPetsClient {
         if (Keys.C.consumeClick()) {
             ClientPacketDistributor.sendToServer(new UseSkillHandler.UseSkill());
         }
+
+        if (Keys.V.consumeClick()) {
+            ClientPacketDistributor.sendToServer(new UsePetsHandler.UsePerSkill());
+        }
     }
     @SubscribeEvent
     public static void event(RegisterClientTooltipComponentFactoriesEvent event){
@@ -58,6 +63,7 @@ public class FloatingPetsClient {
     public static void event(RegisterKeyMappingsEvent event) {
         event.register(Keys.R);
         event.register(Keys.C);
+        event.register(Keys.V);
     }
     @SubscribeEvent
     public static void event(EntityRenderersEvent.RegisterRenderers event){

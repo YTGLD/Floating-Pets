@@ -1,15 +1,13 @@
 package com.ytgld.floating_pets.event.use;
 
-import com.ytgld.floating_pets.FloatingPets;
 import com.ytgld.floating_pets.event.ComponentHandler;
 import com.ytgld.floating_pets.event.TooltipsHandler;
-import com.ytgld.floating_pets.items.component.components.Pill;
-import com.ytgld.floating_pets.items.component.components.Support;
-import com.ytgld.floating_pets.items.component.components.SymbioticMeatballs;
+import com.ytgld.floating_pets.items.component.components.heal.Pill;
+import com.ytgld.floating_pets.items.component.components.heal.Support;
+import com.ytgld.floating_pets.items.component.components.heal.SymbioticMeatballs;
 import com.ytgld.floating_pets.items.items.Agreement;
 import com.ytgld.floating_pets.items.items.BloodMeat;
 import com.ytgld.floating_pets.items.items.YellowCube;
-import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.AddAttributeTooltipsEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
