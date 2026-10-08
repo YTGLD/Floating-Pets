@@ -25,16 +25,21 @@ import java.util.List;
 
 public class AttackBlood extends ThrowableItemProjectile {
     private LivingEntity target;
+    private LivingEntity freshEntity;
     public final List<Vec3> trailPositions = new ArrayList<>();
-    public float damages = 4;
-    public float addDamgae = 0;
+    public final float damages;
     public float speeds = 2;
     public boolean follow;
 
-    public AttackBlood(EntityType<? extends AttackBlood> entityType, Level level) {
+    public AttackBlood(EntityType<? extends AttackBlood> entityType, Level level, float damages) {
         super(entityType, level);
+        this.damages = damages;
         this.setNoGravity(true);
 
+    }
+
+    public AttackBlood(EntityType<? extends AttackBlood> entityType, Level level) {
+        this(entityType, level, 0);
     }
 
     @Override
@@ -52,10 +57,12 @@ public class AttackBlood extends ThrowableItemProjectile {
     }
 
     public void setTarget(LivingEntity target) {
-
         this.target = target;
     }
 
+    public void setFreshEntity(LivingEntity freshEntity) {
+        this.freshEntity = freshEntity;
+    }
     public List<Vec3> getTrailPositions() {
         return trailPositions;
     }
@@ -112,8 +119,12 @@ public class AttackBlood extends ThrowableItemProjectile {
                                         }
                                     }
                                 }
-                                float damageDoomsdayJudgment = (float) (damages + addDamgae + player.getMaxHealth() / 10 + player.getAttributeValue(Attributes.ATTACK_DAMAGE) / 10);
-                                entity.hurt(this.getOwner().damageSources().playerAttack(player), damageDoomsdayJudgment);
+                                float damageDoomsdayJudgment = (float) (damages + player.getMaxHealth() / 10 + player.getAttributeValue(Attributes.ATTACK_DAMAGE) / 10);
+                                if (freshEntity != null) {
+                                    entity.hurt(this.getOwner().damageSources().mobProjectile(this,freshEntity), damageDoomsdayJudgment);
+                                }else {
+                                    entity.hurt(this.getOwner().damageSources().mobProjectile(this,player), damageDoomsdayJudgment);
+                                }
                                 if (follow) {
                                     this.level().addParticle(ParticleTypes.SONIC_BOOM, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
                                 }
@@ -158,7 +169,7 @@ public class AttackBlood extends ThrowableItemProjectile {
 
         float s = 0.175F;
         if (canSee) {
-            if (target != null) {
+            if (target != null && tickCount > 5) {
                 Vec3 targetPos = target.position().add(0, 1, 0);
                 Vec3 currentPos = this.position();
                 Vec3 direction = targetPos.subtract(currentPos).normalize();

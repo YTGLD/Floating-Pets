@@ -64,7 +64,7 @@ public class ItemFloatingPets extends Item implements IPetComponent {
             tooltipComponents.accept(Component.translatable("event.floating_pets.open", Keys.R.getKey().getDisplayName()).withStyle(ChatFormatting.GOLD));
             tooltipComponents.accept(Component.translatable("event.floating_pets.use_skill",Keys.C.getKey().getDisplayName()).withStyle(ChatFormatting.GOLD));
         }
-        if (canUse()) {
+        if (canUsePetSkill()) {
             tooltipComponents.accept(Component.translatable("event.floating_pets.use_pets",Keys.V.getKey().getDisplayName()).withStyle(ChatFormatting.GOLD));
         }
         tooltipComponents.accept(Component.literal(""));

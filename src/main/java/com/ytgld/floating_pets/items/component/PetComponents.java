@@ -1,6 +1,7 @@
 package com.ytgld.floating_pets.items.component;
 
 import com.ytgld.floating_pets.FloatingPets;
+import com.ytgld.floating_pets.items.component.components.blood.Furious;
 import com.ytgld.floating_pets.items.component.components.ironn.Detonator;
 import com.ytgld.floating_pets.items.component.components.ironn.Factory;
 import com.ytgld.floating_pets.items.component.components.heal.Pill;
@@ -24,6 +25,7 @@ public final class PetComponents {
     public static DeferredHolder<PetComponentBase, ?> symbiotic_meatballs = REGISTER.register("symbiotic_meatballs", SymbioticMeatballs::new);
     public static DeferredHolder<PetComponentBase, ?> pill = REGISTER.register("pill", Pill::new);
     public static DeferredHolder<PetComponentBase, ?> detonator = REGISTER.register("detonator", Detonator::new);
+    public static DeferredHolder<PetComponentBase, ?> furious = REGISTER.register("furious", Furious::new);
 
 
     public static void event(NewRegistryEvent event){

@@ -6,12 +6,19 @@ import com.ytgld.floating_pets.entity.BloodOrb;
 import com.ytgld.floating_pets.inventory.PetsInventory;
 import com.ytgld.floating_pets.items.InitItems;
 import com.ytgld.floating_pets.items.ItemFloatingPets;
+import com.ytgld.floating_pets.items.component.components.blood.Furious;
+import com.ytgld.floating_pets.items.component.components.heal.Support;
 import com.ytgld.floating_pets.other.DataReg;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+
+import java.util.function.Consumer;
 
 public class BloodMeat extends ItemFloatingPets {
     public BloodMeat(Item.Properties properties) {
@@ -61,6 +68,18 @@ public class BloodMeat extends ItemFloatingPets {
             }
         }
     }
+
+    @Override
+    public void text(ItemStack stack, Consumer<Component> tooltipComponents, TooltipFlag flag) {
+        super.text(stack, tooltipComponents, flag);
+        float value = 0;
+        CompoundTag compoundTag = stack.get(DataReg.tag);
+        if (compoundTag !=null) {
+            value = compoundTag.getIntOr(Furious.tag,0);
+        }
+        tooltipComponents.accept(Component.translatable("floating_pets.kill",value).withStyle(ChatFormatting.GOLD));
+    }
+
     @Override
     public int maxComponentNumber(ItemStack stack) {
         return 2;

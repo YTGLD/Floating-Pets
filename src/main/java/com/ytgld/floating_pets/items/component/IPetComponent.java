@@ -80,7 +80,9 @@ public interface IPetComponent {
                     if (petComponentData == null) {
                         continue;
                     }
-                    return petComponentData.hashSet().contains(giftBase.id().toString());
+                    if (petComponentData.hashSet().contains(giftBase.id().toString())) {
+                        return true;
+                    }
                 }
             }
         }

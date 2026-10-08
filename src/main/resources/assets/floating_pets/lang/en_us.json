@@ -11,10 +11,11 @@
   "floating_pets.book.tip.1": "召唤你的小跟班！",
   "floating_pets.agreement": "煅烧物品数：%d",
   "floating_pets.heal": "受到治疗：%d",
+  "floating_pets.kill": "生物击杀数：%d",
   "key.floating_pets.c": "召唤宠物",
   "key.floating_pets.r": "打开界面",
   "key.floating_pets.v": "使用宠物技能",
-
+  "attribute.name.floating_pets.blood_attack_time": "大血球攻击间隔",
 
   "entity.floating_pets.reactor": "反应炉",
   "entity.floating_pets.chaos_cube": "混沌立方",
@@ -33,7 +34,7 @@
 
   "item.floating_pets.blood_meat": "血肉",
   "floating_pets.book.blood_meat.1": "血肉增生的砖头（第三个宠物）",
-  "floating_pets.book.blood_meat.2": "它的名字叫“血浆球”，会漂浮在你的附近\n它可以每隔一段时间攻击附近的敌对生物\n\n血肉有两个槽位\n在某些情况下可以获得组件",
+  "floating_pets.book.blood_meat.2": "它的名字叫“大血球”，会漂浮在你的附近\n它可以每隔一段时间攻击附近的敌对生物\n\n血肉有两个槽位\n在某些情况下可以获得组件",
 
 
 
@@ -67,5 +68,11 @@
   "floating_pets.component.pill.tip.1":"在主人受到8点以上的伤害时给予BUFF",
   "floating_pets.component.pill.tip.2":"但是混沌立方会损失相同伤害的生命值",
   "floating_pets.component.pill.tip.3":"受到伤害后短时间无法再次召唤混沌立方",
-  "floating_pets.component.pill.tip.give":"拖动下界之星在背包界面右键黄色玻璃块解锁"
+  "floating_pets.component.pill.tip.give":"拖动下界之星在背包界面右键黄色玻璃块解锁",
+
+
+  "floating_pets.component.furious.name":"狂暴药剂",
+  "floating_pets.component.furious.tip.1":"提高大血球的攻击速度和伤害",
+  "floating_pets.component.furious.tip.2":"大血球死亡时会产生很多小血球",
+  "floating_pets.component.furious.tip.give":"使用大血球杀死32只生物解锁"
 }

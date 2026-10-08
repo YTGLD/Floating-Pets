@@ -10,6 +10,7 @@ import com.ytgld.floating_pets.inventory.PetsMenuTypes;
 import com.ytgld.floating_pets.items.FloatingPetsBook;
 import com.ytgld.floating_pets.items.InitItems;
 import com.ytgld.floating_pets.items.component.PetComponents;
+import com.ytgld.floating_pets.other.AttReg;
 import com.ytgld.floating_pets.other.DataReg;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -32,6 +33,7 @@ public class FloatingPets {
         PetsMenuTypes.register.register(modEventBus);
         DataReg.REGISTRY.register(modEventBus);
         PetComponents.REGISTER.register(modEventBus);
+        AttReg.REGISTRY.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(new MainEvent());
         modEventBus.addListener(PetComponents::event);

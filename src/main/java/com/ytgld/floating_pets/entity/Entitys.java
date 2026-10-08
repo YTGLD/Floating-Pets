@@ -31,14 +31,14 @@ public class Entitys {
                     Identifier.fromNamespaceAndPath(FloatingPets.MODID, "blood_orb"))));
 
     public static final DeferredHolder<EntityType<?>, EntityType<AttackBlood>> AttackBlood_ = REGISTRY.register("attack_blood", () ->
-            EntityType.Builder.of(AttackBlood::new, MobCategory.MISC).sized(0.05f, 0.05f).clientTrackingRange(50).build(ResourceKey.create(Registries.ENTITY_TYPE,
+            EntityType.Builder.<AttackBlood>of(AttackBlood::new, MobCategory.MISC).sized(0.05f, 0.05f).clientTrackingRange(50).build(ResourceKey.create(Registries.ENTITY_TYPE,
                     Identifier.fromNamespaceAndPath(FloatingPets.MODID, "attack_blood"))));
 
     @SubscribeEvent
     public static void EntityAttributeCreationEvent(EntityAttributeCreationEvent event){
         event.put(Entitys.Reactor_.get(), IronGolem.createAttributes().build());
         event.put(Entitys.ChaosCube_.get(), ChaosCube.createAttributes().build());
-        event.put(Entitys.BloodOrb_.get(), Zombie.createAttributes().build());
+        event.put(Entitys.BloodOrb_.get(), BloodOrb.createAttributes().build());
     }
 
 }

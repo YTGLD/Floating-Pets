@@ -82,6 +82,11 @@ public class Agreement extends ItemFloatingPets {
     }
 
     @Override
+    public boolean canUsePetSkill() {
+        return true;
+    }
+
+    @Override
     public int maxComponentNumber(ItemStack stack) {
         return 2;
     }

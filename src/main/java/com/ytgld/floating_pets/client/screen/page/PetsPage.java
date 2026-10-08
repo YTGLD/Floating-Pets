@@ -54,6 +54,21 @@ public class PetsPage implements RegisterBookPage {
                 color,color,
                 FloatingPetsScreen.ThePage.BASE,
                 new FloatingPetsScreen.ArrowDegree(d270)));
+
+
+        list.add(new FloatingPetsScreen.FloatingPetsPage(Identifier.fromNamespaceAndPath(FloatingPets.MODID,
+                "textures/components/furious.png"),
+                new Vec2(posOffset * 2,posOffset * 3),Component.translatable("floating_pets.component.furious.name"),
+                List.of(
+                        Component.translatable("floating_pets.component.furious.tip.1"),
+                        Component.translatable("floating_pets.component.furious.tip.2"),
+                        Component.translatable("floating_pets.component.furious.tip.give"),
+                        clones()
+                ),
+                color,color,
+                FloatingPetsScreen.ThePage.BASE,
+                null));
+
     }
     private void addChaosCube(List<FloatingPetsScreen.FloatingPetsPage> list) {
 

@@ -3,7 +3,11 @@ package com.ytgld.floating_pets.entity;
 import com.ytgld.floating_pets.Handler;
 import com.ytgld.floating_pets.inventory.PetsInventory;
 import com.ytgld.floating_pets.items.InitItems;
+import com.ytgld.floating_pets.items.component.IPetComponent;
+import com.ytgld.floating_pets.items.component.PetComponents;
+import com.ytgld.floating_pets.items.component.components.blood.Furious;
 import com.ytgld.floating_pets.items.items.BloodMeat;
+import com.ytgld.floating_pets.other.AttReg;
 import com.ytgld.floating_pets.other.DataReg;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -11,12 +15,9 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -40,9 +41,7 @@ public class BloodOrb extends PetTamableAnimal {
         super(p_21803_, p_21804_);
         this.setNoGravity(true);
     }
-    @Override
-    public void die(@NotNull DamageSource p_21809_) {
-    }
+
     public void dis(){
         Vec3 playerPos = this.position();
         int range = 10;
@@ -59,17 +58,28 @@ public class BloodOrb extends PetTamableAnimal {
         }
     }
 
+    public static AttributeSupplier.Builder createAttributes() {
+        return Monster.createMonsterAttributes()
+                .add(Attributes.ATTACK_DAMAGE, 5)
+                .add(Attributes.MAX_HEALTH, 10)
+                .add(AttReg.blood_attack_time, 20)
+                .add(Attributes.ARMOR, 4);
+    }
     public void hurtaTTACK(){
-            int time = 20;
+        int time = (int) (this.getAttributeValue(AttReg.blood_attack_time));
 
         if (this.getOwner() instanceof Player player && this.getTarget() instanceof LivingEntity living) {
             if (player.position().distanceTo(living.position()) < 45) {
                 if (this.tickCount % time ==1) {
-                    AttackBlood attackBlood = new AttackBlood(Entitys.AttackBlood_.get(), living.level());
+                    AttackBlood attackBlood = new AttackBlood(
+                            Entitys.AttackBlood_.get(),
+                            living.level(),
+                            (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE)
+                    );
                     attackBlood.setPos(this.position().add(0, 0, 0));
                     attackBlood.setOwner(player);
                     attackBlood.setTarget(living);
-                    attackBlood.damages += ((float) (player.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.1F));
+                    attackBlood.setFreshEntity(this);
                     this.level().addFreshEntity(attackBlood);
                 }
             }
@@ -80,6 +90,7 @@ public class BloodOrb extends PetTamableAnimal {
     @Override
     public void tick() {
         super.tick();
+        this.getAttributes().addTransientAttributeModifiers(Furious.attributeModifierMultimap(this));
         this.setNoGravity(true);
         if (!(this.getOwner() instanceof Player player)) {
             this.discard();
@@ -107,10 +118,12 @@ public class BloodOrb extends PetTamableAnimal {
             }
         }
 
+
         clear();
         hurtaTTACK();
         dis();
     }
+
 
     private void clear(){
         if (canLive) {
@@ -142,7 +155,6 @@ public class BloodOrb extends PetTamableAnimal {
             this.discard();
         }
     }
-
     @Override
     public boolean isFood(ItemStack pStack) {
         return false;
@@ -155,6 +167,23 @@ public class BloodOrb extends PetTamableAnimal {
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundEvents.RESPAWN_ANCHOR_CHARGE;
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        super.die(source);
+        if (this.getOwner() instanceof Player player && IPetComponent.isHasComponent(player,PetComponents.furious.get())) {
+            for (int i = 0; i < 8; i++) {
+                AttackBlood attackBlood = new AttackBlood(Entitys.AttackBlood_.get(), level(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
+                attackBlood.setPos(this.position());
+                attackBlood.setOwner(player);
+                attackBlood.setTarget(this.getTarget());
+                attackBlood.setDeltaMovement(new Vec3(Math.cos(i) / 10f, 0, Math.sin(i) / 10f));
+                attackBlood.setFreshEntity(this);
+                this.level().addFreshEntity(attackBlood);
+            }
+        }
+
     }
 
     @Override

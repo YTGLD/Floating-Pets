@@ -2,6 +2,7 @@ package com.ytgld.floating_pets.event.use;
 
 import com.ytgld.floating_pets.event.ComponentHandler;
 import com.ytgld.floating_pets.event.TooltipsHandler;
+import com.ytgld.floating_pets.items.component.components.blood.Furious;
 import com.ytgld.floating_pets.items.component.components.heal.Pill;
 import com.ytgld.floating_pets.items.component.components.heal.Support;
 import com.ytgld.floating_pets.items.component.components.heal.SymbioticMeatballs;
@@ -11,6 +12,7 @@ import com.ytgld.floating_pets.items.items.YellowCube;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.AddAttributeTooltipsEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -42,6 +44,10 @@ public class MainEvent {
         Support.event(event);
     }
 
+    @SubscribeEvent
+    public void event(LivingDeathEvent event){
+        Furious.event(event);
+    }
     @SubscribeEvent
     public void event(LivingDamageEvent.Post event){
         Pill.event(event);
