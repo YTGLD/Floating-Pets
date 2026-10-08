@@ -3,6 +3,7 @@ package com.ytgld.floating_pets.event.use;
 import com.ytgld.floating_pets.FloatingPets;
 import com.ytgld.floating_pets.event.ComponentHandler;
 import com.ytgld.floating_pets.event.TooltipsHandler;
+import com.ytgld.floating_pets.items.component.components.Pill;
 import com.ytgld.floating_pets.items.component.components.Support;
 import com.ytgld.floating_pets.items.component.components.SymbioticMeatballs;
 import com.ytgld.floating_pets.items.items.Agreement;
@@ -41,6 +42,11 @@ public class MainEvent {
     @SubscribeEvent
     public void event(LivingHealEvent event){
         Support.event(event);
+    }
+
+    @SubscribeEvent
+    public void event(LivingDamageEvent.Post event){
+        Pill.event(event);
     }
 
 }

@@ -98,6 +98,20 @@ public class PetsPage implements RegisterBookPage {
                 ),
                 color,color,
                 FloatingPetsScreen.ThePage.BASE,
+                new FloatingPetsScreen.ArrowDegree(d90)));
+
+        list.add(new FloatingPetsScreen.FloatingPetsPage(Identifier.fromNamespaceAndPath(FloatingPets.MODID,
+                "textures/components/pill.png"),
+                new Vec2(posOffset * 4,posOffset * 2),Component.translatable("floating_pets.component.pill.name"),
+                List.of(
+                        Component.translatable("floating_pets.component.pill.tip.1"),
+                        Component.translatable("floating_pets.component.pill.tip.2"),
+                        Component.translatable("floating_pets.component.pill.tip.3"),
+                        Component.translatable("floating_pets.component.pill.tip.give"),
+                        clones()
+                ),
+                color,color,
+                FloatingPetsScreen.ThePage.BASE,
                 null));
 
         list.add(new FloatingPetsScreen.FloatingPetsPage(InitItems.BloodMeat_.asItem(),

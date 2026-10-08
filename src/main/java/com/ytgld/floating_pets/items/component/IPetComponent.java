@@ -102,6 +102,7 @@ public interface IPetComponent {
                     if (compoundTag != null) {
                         if (compoundTag.getIntOr(string, 0) > max) {
                             IPetComponent.addComponent(stack,componentBase);
+                            break;
                         }
                     }
                 }
@@ -123,6 +124,7 @@ public interface IPetComponent {
                     }
                     if (compoundTag != null) {
                         compoundTag.putInt(string,compoundTag.getIntOr(string,0) + add);
+                        break;
                     }
                 }
             }

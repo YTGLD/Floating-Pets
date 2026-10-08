@@ -27,17 +27,6 @@ public class Factory extends PetComponentBase {
     }
 
     @Override
-    public AttHolderModify attHolderModify() {
-        AttHolderModify attHolderModify = new AttHolderModify(new HashMap<>());
-
-        attHolderModify.multimap().put(Attributes.MAX_HEALTH,
-                new AttributeModifier(this.id(),
-                        4, AttributeModifier.Operation.ADD_VALUE));
-
-        return attHolderModify;
-    }
-
-    @Override
     public void text(ItemStack stack, List<Component> tooltipComponents, TooltipFlag flag) {
         super.text(stack, tooltipComponents, flag);
         tooltipComponents.add(Component.translatable("floating_pets.component.factory.tip.1").withStyle(ChatFormatting.GOLD));

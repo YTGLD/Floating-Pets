@@ -4,7 +4,6 @@ import com.ytgld.floating_pets.client.RenderPetComponent;
 import com.ytgld.floating_pets.client.gui_particles.BlackParticlesAdd;
 import com.ytgld.floating_pets.client.warp.FloatingPetsFrameGraph;
 import com.ytgld.floating_pets.entity.Entitys;
-import com.ytgld.floating_pets.entity.LightBulb;
 import com.ytgld.floating_pets.entity.render.*;
 import com.ytgld.floating_pets.other.Keys;
 import com.ytgld.floating_pets.event.OpenHandler;
@@ -66,6 +65,5 @@ public class FloatingPetsClient {
         event.registerEntityRenderer(Entitys.ChaosCube_.get(), ChaosCubeRender::new);
         event.registerEntityRenderer(Entitys.AttackBlood_.get(), AttackBloodRender::new);
         event.registerEntityRenderer(Entitys.BloodOrb_.get(), BloodOrbRender::new);
-        event.registerEntityRenderer(Entitys.LightBulb_.get(), LightBulbRender::new);
     }
 }

@@ -61,9 +61,11 @@ public class AttackBloodRender extends EntityRenderer<AttackBlood, AttackBloodRe
             addTrail(pose,entity,bufferSource,1,0,0,0.15f);
         });
 
-        collector.submitCustomGeometry(poseStack, MRender.endBlack, (pose, bufferSource) -> {
-            renderSphere1(pose, bufferSource, 0, 0.15f);
-        });
+        if (entity.canSee) {
+            collector.submitCustomGeometry(poseStack, MRender.endBlack, (pose, bufferSource) -> {
+                renderSphere1(pose, bufferSource, 0, 0.15f);
+            });
+        }
         poseStack.popPose();
     }
 

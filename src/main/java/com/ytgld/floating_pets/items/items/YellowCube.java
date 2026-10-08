@@ -7,11 +7,17 @@ import com.ytgld.floating_pets.entity.ChaosCube;
 import com.ytgld.floating_pets.inventory.PetsInventory;
 import com.ytgld.floating_pets.items.InitItems;
 import com.ytgld.floating_pets.items.ItemFloatingPets;
+import com.ytgld.floating_pets.items.component.components.Support;
 import com.ytgld.floating_pets.other.DataReg;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+
+import java.util.function.Consumer;
 
 public class YellowCube extends ItemFloatingPets {
     public YellowCube(Properties properties) {
@@ -31,6 +37,9 @@ public class YellowCube extends ItemFloatingPets {
     public static final String YELLOW_CUBE = "YellowCube";
     public static void onKeyIsDown(Player player) {
         if (!Handler.has(player, InitItems.YellowCube_.asItem())) {
+            return;
+        }
+        if (player.getCooldowns().isOnCooldown(InitItems.YellowCube_.asItem().getDefaultInstance())) {
             return;
         }
         PetsInventory chestInventory = Handler.getItem(player);
@@ -59,6 +68,17 @@ public class YellowCube extends ItemFloatingPets {
                 }
             }
         }
+    }
+
+    @Override
+    public void text(ItemStack stack, Consumer<Component> tooltipComponents, TooltipFlag flag) {
+        super.text(stack, tooltipComponents, flag);
+        float value = 0;
+        CompoundTag compoundTag = stack.get(DataReg.tag);
+        if (compoundTag !=null) {
+            value = compoundTag.getIntOr(Support.tag,0);
+        }
+        tooltipComponents.accept(Component.translatable("floating_pets.heal",value).withStyle(ChatFormatting.GOLD));
     }
 
     @Override

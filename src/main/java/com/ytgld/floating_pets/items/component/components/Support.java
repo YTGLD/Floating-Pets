@@ -40,7 +40,7 @@ public class Support extends PetComponentBase {
         if (event.getEntity() instanceof Player player) {
             if (!IPetComponent.isHasComponent(player, PetComponents.support.get())) {
                 float value = event.getAmount() + 1;
-                IPetComponent.addNumber(player, InitItems.YellowCube_.asItem(),tag,600,PetComponents.support.get(), (int) value);
+                IPetComponent.addNumber(player, InitItems.YellowCube_.asItem(),tag,900,PetComponents.support.get(), (int) value);
             }
         }
     }

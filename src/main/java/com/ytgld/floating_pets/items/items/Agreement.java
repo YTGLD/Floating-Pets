@@ -8,6 +8,8 @@ import com.ytgld.floating_pets.items.InitItems;
 import com.ytgld.floating_pets.items.ItemFloatingPets;
 import com.ytgld.floating_pets.items.component.IPetComponent;
 import com.ytgld.floating_pets.items.component.PetComponents;
+import com.ytgld.floating_pets.items.component.components.Factory;
+import com.ytgld.floating_pets.items.component.components.Support;
 import com.ytgld.floating_pets.other.DataReg;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -72,6 +74,17 @@ public class Agreement extends ItemFloatingPets {
             }
         }
     }
+    @Override
+    public void text(ItemStack stack, Consumer<Component> tooltipComponents, TooltipFlag flag) {
+        super.text(stack, tooltipComponents, flag);
+        float value = 0;
+        CompoundTag compoundTag = stack.get(DataReg.tag);
+        if (compoundTag !=null) {
+            value = compoundTag.getIntOr(Factory.tag,0);
+        }
+        tooltipComponents.accept(Component.translatable("floating_pets.agreement",value).withStyle(ChatFormatting.GOLD));
+    }
+
     @Override
     public int maxComponentNumber(ItemStack stack) {
         return 2;
